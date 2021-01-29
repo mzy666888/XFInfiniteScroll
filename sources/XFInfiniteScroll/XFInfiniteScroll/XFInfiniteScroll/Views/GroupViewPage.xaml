@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XFInfiniteScroll.Views.GroupViewPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling">
+    <ContentPage.Content>
+        <ListView
+            x:Name="GroupItems"
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            IsGroupingEnabled="True"
+            VerticalOptions="FillAndExpand">
+            <ListView.Behaviors>
+                <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsWorking}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*">
+                                </ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20">
+                                </RowDefinition>
+                                <RowDefinition Height="20">
+                                </RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                Text="{Binding Text}"
+                                TextColor="Black">
+                            </Label>
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding Description}"
+                                TextColor="Black">
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell Height="25">
+                        <Grid BackgroundColor="White">
+                            <Label
+                                FontAttributes="None"
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Header}"
+                                TextColor="Blue"
+                                VerticalTextAlignment="Center">
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.Footer>
+                <Grid Padding="6">
+                    <Label
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsWorking}"
+                        Text="Load..."
+                        TextColor="Black"
+                        VerticalOptions="Center">
+                    </Label>
+                </Grid>
+            </ListView.Footer>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
